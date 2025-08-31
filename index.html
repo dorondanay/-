@@ -175,13 +175,54 @@
 </div>
 
 <script>
-  function openFS(n){document.getElementById('fs-'+n).classList.add('open');}
-  function closeFS(n){document.getElementById('fs-'+n).classList.remove('open');}
-  document.getElementById('btn-wings')?.addEventListener('click',()=>document.getElementById('dlg-wings').showModal());
+  // פותח/סוגר מסכי FULLSCREEN
+  function openFS(name){ const el=document.getElementById('fs-'+name); if(el) el.classList.add('open'); }
+  function closeFS(name){ const el=document.getElementById('fs-'+name); if(el) el.classList.remove('open'); }
+
+  // Polyfill מינימלי ל-<dialog> אם אין תמיכה
+  (function(){
+    if (typeof HTMLDialogElement === 'undefined') {
+      document.querySelectorAll('dialog').forEach(d=>{
+        d.showModal = () => alert(d.querySelector('.dlg-head')?.textContent || 'מידע');
+        d.close = () => {};
+      });
+    }
+  })();
+
+  // קושרים מאזינים רק אחרי טעינת ה-DOM
+  document.addEventListener('DOMContentLoaded', () => {
+    // סימון קטן שנדע שה-JS רץ
+    const h1=document.querySelector('h1'); if(h1 && !h1.textContent.includes('✓')) h1.textContent+=' ✓';
+
+    // פתיחת דיאלוג Wings
+    const btnWings = document.getElementById('btn-wings');
+    const dlgWings = document.getElementById('dlg-wings');
+    if (btnWings && dlgWings) {
+      btnWings.addEventListener('click', (e)=>{ e.preventDefault(); dlgWings.showModal(); });
+    }
+
+    // פתיחת מסכי FULLSCREEN
+    const map = [
+      ['open-talks','talks'],
+      ['open-coaching','coaching'],
+      ['open-reels','reels'],
+    ];
+    map.forEach(([id,name])=>{
+      const el = document.getElementById(id);
+      if (el) el.addEventListener('click', (e)=>{ e.preventDefault(); openFS(name); });
+    });
+
+    // כפתורי חזרה במסכי FULLSCREEN
+    document.querySelectorAll('.fs .back').forEach(btn=>{
+      btn.addEventListener('click',(e)=>{ e.preventDefault(); btn.closest('.fs')?.classList.remove('open'); });
+    });
+  });
 </script>
+
 
 </body>
 </html>
+
 
 
 
