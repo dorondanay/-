@@ -287,25 +287,47 @@
       }
 
       /* שרטוט המסגרות על התמונה (לפי bounding rect של התמונה) */
-      function layoutHotspots() {
-        const r = img.getBoundingClientRect();
-        const layer = document.getElementById('hotspots');
-        layer.innerHTML = "";
-        hotspots.forEach(h => {
-          const el = document.createElement('a');
-          el.className = 'hotspot';
-          el.setAttribute('aria-label', h.title);
-          el.title = h.title;
-          el.style.left   = (r.left + (h.left/100)*r.width) + 'px';
-          el.style.top    = (r.top  + (h.top /100)*r.height) + 'px';
-          el.style.width  = ((h.width /100)*r.width) + 'px';
-          el.style.height = ((h.height/100)*r.height) + 'px';
-          el.href = "javascript:void(0)";
-          el.onclick = (e) => { e.preventDefault(); h.action && h.action(); };
-          layer.appendChild(el);
-        });
-      }
+     function layoutHotspots() {
+  const r = img.getBoundingClientRect();
+  const layer = document.getElementById('hotspots');
+  const CM = 96 / 2.54; // 1cm ≈ 37.795px ב־CSS
 
+  layer.innerHTML = "";
+  hotspots.forEach(h => {
+    const scale = h.scale || 1;
+
+    // ממדים מקוריים בפיקסלים לפי אחוזים מהתמונה
+    const w0  = (h.width  / 100) * r.width;
+    const h0  = (h.height / 100) * r.height;
+
+    // מרכז המסגרת המקורית
+    const cx  = r.left + ((h.left + h.width/2)  / 100) * r.width;
+    const cy  = r.top  + ((h.top  + h.height/2) / 100) * r.height;
+
+    // הגדלה סביב המרכז
+    const w   = w0 * scale;
+    const hpx = h0 * scale;
+
+    // היסטים בס"מ -> פיקסלים (חיובי: ימין/מטה)
+    const dx  = (h.dx_cm || 0) * CM;
+    const dy  = (h.dy_cm || 0) * CM;
+
+    // מיקום סופי (פינה שמאלית-עליונה של המלבן)
+    const left = cx - w/2 + dx;
+    const top  = cy - hpx/2 + dy;
+
+    const el = document.createElement('a');
+    el.className = 'hotspot';
+    el.setAttribute('aria-label', h.title);
+    el.title = h.title;
+    el.style.left   = left + 'px';
+    el.style.top    = top  + 'px';
+    el.style.width  = w    + 'px';
+    el.style.height = hpx  + 'px';
+    el.href = "javascript:void(0)";
+    el.onclick = (e) => { e.preventDefault(); h.action && h.action(); };
+    layer.appendChild(el);
+  });
       /* פתיחת חלונות וקישורי רכישה */
       window.openDialog = (id) => { document.getElementById(id)?.showModal(); };
       window.openBuy = (key) => {
@@ -332,6 +354,7 @@
   </script>
 </body>
 </html>
+
 
 
 
