@@ -1,1 +1,174 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <title>האתר של דורון דנאי</title>
+  <base href="/-/" />
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <style>
+    :root{--bg:#f6f7fb;--ink:#222;--brand:#0a84ff;--card:#fff;--shadow:0 8px 30px rgba(0,0,0,.12);--r:16px;}
+    *{box-sizing:border-box}
+    body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.6 system-ui,Arial}
+    header{position:sticky;top:0;z-index:10;background:#ffffffd6;backdrop-filter:saturate(140%) blur(4px);box-shadow:0 2px 10px rgba(0,0,0,.06)}
+    .wrap{max-width:1100px;margin:auto;padding:16px}
+    h1{margin:0;font-size:22px}
+    .hero{position:relative;display:flex;justify-content:center;padding:22px}
+    .hero img{max-width:100%;border-radius:var(--r);box-shadow:var(--shadow)}
+    .hotspot{position:absolute;cursor:pointer;}
+    h2{margin:28px 8px 12px;font-size:22px}
+    .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:18px}
+    .card{background:var(--card);border-radius:var(--r);box-shadow:var(--shadow);padding:10px;text-align:center;transition:.2s transform}
+    .card:hover{transform:translateY(-2px)}
+    .card img{width:100%;border-radius:12px}
+    .btn{display:inline-block;margin:10px 6px 4px;padding:10px 14px;border-radius:999px;background:var(--brand);color:#fff;text-decoration:none;font-weight:700;cursor:pointer}
+    .btn.ghost{background:#fff;color:var(--brand);border:2px solid var(--brand)}
+    footer{margin-top:40px;background:#111;color:#eee;padding:22px;text-align:center}
+    .fs{position:fixed;inset:0;background:rgba(0,0,0,.55);display:none;align-items:center;justify-content:center;z-index:50}
+    .fs.open{display:flex}
+    .fs-inner{background:#fff;max-width:1200px;width:96%;max-height:92%;border-radius:18px;overflow:auto;box-shadow:var(--shadow)}
+    .fs-head{display:flex;justify-content:space-between;align-items:center;padding:10px 14px;border-bottom:1px solid #eee;position:sticky;top:0;background:#fff}
+    .fs-head .back{background:#ff3b30;color:#fff;border:none;padding:10px 14px;border-radius:999px;font-weight:700;cursor:pointer}
+    .fs-body{padding:14px}
+    .fs-img{width:100%;border-radius:12px;box-shadow:var(--shadow)}
+    dialog{border:none;border-radius:18px;box-shadow:var(--shadow);max-width:720px;width:94%}
+    dialog::backdrop{background:rgba(0,0,0,.35)}
+    .dlg-head{font-weight:800;margin-bottom:6px}
+    .contact-box{border:2px dashed #999;padding:10px;border-radius:12px;margin-top:8px}
+  </style>
+</head>
+<body>
+
+<header><div class="wrap"><h1>האתר של דורון דנאי</h1></div></header>
+
+<main class="wrap">
+
+  <!-- Master -->
+  <section class="hero">
+    <img src="Master Page.jpg" alt="Master Page">
+  </section>
+
+  <!-- ספרים -->
+  <section>
+    <h2>📚 ספרים</h2>
+    <div class="grid">
+      <article class="card">
+        <img src="Worn Wings back.jpg" alt="כנפיים שחוקות">
+        <div>
+          <a class="btn" target="_blank" rel="noopener"
+             href="purchase?b=8dfe116b4b9a656246375c897a49d9a4">מעבר לרכישה מאובטחת</a>
+          <a class="btn ghost" href="Worn Wings back.jpg" target="_blank">פרטים נוספים</a>
+        </div>
+      </article>
+      <article class="card">
+        <img src="Twins back.jpg" alt="צמד חמד">
+        <div>
+          <a class="btn" href="mailto:danaydoron@gmail.com?subject=רכישת צמד חמד">רכישה (במייל)</a>
+          <a class="btn ghost" href="Twins back.jpg" target="_blank">פרטים נוספים</a>
+        </div>
+      </article>
+      <article class="card">
+        <img src="Wings back.jpg" alt="Wings">
+        <div>
+          <a class="btn" id="btn-wings">רכישה</a>
+          <a class="btn ghost" href="Wings back.jpg" target="_blank">פרטים נוספים</a>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- הרצאות -->
+  <section>
+    <h2>🎤 הרצאות</h2>
+    <div class="grid">
+      <a class="card" href="#" onclick="openFS('talks');return false;">
+        <img src="Talks.jpg" alt="Talks"><p>מסך מלא</p>
+      </a>
+      <a class="card" href="Safety culture.jpg" target="_blank"><img src="Safety culture.jpg"><p>תרבות הבטיחות</p></a>
+      <a class="card" href="Thats life final.jpg" target="_blank"><img src="Thats life final.jpg"><p>התפקחות מאשליות החיים</p></a>
+    </div>
+  </section>
+
+  <!-- אימון אישי -->
+  <section>
+    <h2>🌿 אימון אישי</h2>
+    <div class="grid">
+      <a class="card" href="#" onclick="openFS('coaching');return false;">
+        <img src="coaching master.jpg" alt="אימון"><p>מסך מלא</p>
+      </a>
+    </div>
+  </section>
+
+  <!-- רילס -->
+  <section>
+    <h2>🎬 Reels</h2>
+    <div class="grid">
+      <a class="card" href="#" onclick="openFS('reels');return false;">
+        <img src="REELS.jpg" alt="REELS"><p>מסך מלא</p>
+      </a>
+      <a class="card" href="PT.jpg" target="_blank"><img src="PT.jpg"><p>PT</p></a>
+    </div>
+  </section>
+
+</main>
+
+<footer>© 2025 דורון דנאי</footer>
+
+<!-- דיאלוגים -->
+<dialog id="dlg-wings">
+  <div class="dlg-head">Wings — מצב מלאי</div>
+  <p>המוצר <strong>אזל מהמלאי</strong>.</p>
+  <div class="contact-box">לפניה: <a href="mailto:danaydoron@gmail.com?subject=עדכון Wings">danaydoron@gmail.com</a></div>
+  <form method="dialog"><button class="btn">סגור</button></form>
+</dialog>
+
+<!-- FULLSCREEN -->
+<div id="fs-talks" class="fs">
+  <div class="fs-inner">
+    <div class="fs-head"><strong>הרצאות</strong><button class="back" onclick="closeFS('talks')">חזרה</button></div>
+    <div class="fs-body">
+      <img src="Talks.jpg" class="fs-img" alt="">
+      <a class="hotspot" href="Safety culture.jpg" target="_blank"
+         style="left:20.2%;top:6.5%;width:22.3%;height:36.7%;"></a>
+      <a class="hotspot" href="Thats life final.jpg" target="_blank"
+         style="left:20%;top:47.3%;width:22.6%;height:40.8%;"></a>
+    </div>
+  </div>
+</div>
+
+<div id="fs-coaching" class="fs">
+  <div class="fs-inner">
+    <div class="fs-head"><strong>אימון אישי</strong><button class="back" onclick="closeFS('coaching')">חזרה</button></div>
+    <div class="fs-body">
+      <img src="coaching master.jpg" class="fs-img" alt="">
+      <a class="hotspot" href="mailto:danaydoron@gmail.com" style="left:39.7%;top:1%;width:29%;height:9.2%;"></a>
+      <a class="hotspot" href="#" onclick="document.getElementById('dlg-wings').showModal();return false;"
+         style="left:18.9%;top:6.3%;width:12.4%;height:7.8%;"></a>
+      <a class="hotspot" href="#" onclick="openFS('reels');return false;"
+         style="left:19.1%;top:15.8%;width:12.1%;height:7.5%;"></a>
+    </div>
+  </div>
+</div>
+
+<div id="fs-reels" class="fs">
+  <div class="fs-inner">
+    <div class="fs-head"><strong>Reels</strong><button class="back" onclick="closeFS('reels')">חזרה</button></div>
+    <div class="fs-body">
+      <div class="grid">
+        <a class="card" href="REELS.jpg" target="_blank"><img src="REELS.jpg"><p>מסגרת 1</p></a>
+        <a class="card" href="PT.jpg" target="_blank"><img src="PT.jpg"><p>מסגרת 2</p></a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  function openFS(n){document.getElementById('fs-'+n).classList.add('open');}
+  function closeFS(n){document.getElementById('fs-'+n).classList.remove('open');}
+  document.getElementById('btn-wings')?.addEventListener('click',()=>document.getElementById('dlg-wings').showModal());
+</script>
+
+</body>
+</html>
+
 
