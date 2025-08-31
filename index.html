@@ -185,21 +185,63 @@
       /* HOTSPOTS באחוזים יחסית לתמונה */
       /* אפשר לכוונן — תגיד “+2% ימינה, -1% למעלה” וכו' ואכוון עבורך. */
       const hotspots = [
-        // אימון אישי – "פרטים" (שמאל-תחתון)
-        { id:"coach-details", left:12.0, top:73.0, width:12.0, height:7.0, action:() => openDialog('dlg-coach'), title:"אימון אישי — פרטים" },
+  // אימון אישי – הגדלה פי 5 כדי לכסות את כל האזור (בלי הזזה)
+  { id:"coach-details",
+    left:12.0, top:73.0, width:12.0, height:7.0,
+    scale:5, dx_cm:0, dy_cm:0,
+    action:() => openDialog('dlg-coach'),
+    title:"אימון אישי — פרטים"
+  },
 
-        // הרצאות – "פרטים" (מרכז-תחתון)
-        { id:"talks-details", left:42.0, top:76.0, width:12.0, height:7.0, action:() => openDialog('dlg-talks'), title:"סדנאות/הרצאות — פרטים" },
+  // הרצאות/סדנאות – הגדלה פי 5
+  { id:"talks-details",
+    left:42.0, top:76.0, width:12.0, height:7.0,
+    scale:5, dx_cm:0, dy_cm:0,
+    action:() => openDialog('dlg-talks'),
+    title:"סדנאות/הרצאות — פרטים"
+  },
 
-        // ספר “צמד חמד” — כפתור כחול "פרטים"
-        { id:"twins-details", left:61.0, top:71.0, width:10.0, height:6.0, action:() => openDialog('dlg-twins'), title:"צמד חמד — פרטים" },
-        // ספר “צמד חמד” — כפתור ירוק "רכישה"
-        { id:"twins-buy",     left:70.0, top:71.0, width:7.0,  height:6.0, action:() => openBuy('buyTwins'), title:"צמד חמד — רכישה" },
+  // כנפיים (הספר האדום) — פרטים + רכישה עם “אזל”: לעלות בסנטימטר
+  { id:"wings-details",
+    left:61.0, top:71.0, width:10.0, height:6.0,
+    scale:1, dx_cm:0, dy_cm:-1,
+    action:() => openDialog('dlg-wings'),
+    title:"כנפיים — פרטים"
+  },
+  { id:"wings-buy",
+    left:70.0, top:71.0, width:7.0,  height:6.0,
+    scale:1, dx_cm:0, dy_cm:-1,
+    action:() => openDialog('dlg-wings-buy'),
+    title:"כנפיים — רכישה"
+  },
 
-        // ספר “כנפיים שחוקות” — כפתור כחול "פרטים"
-        { id:"worn-details",  left:77.0, top:79.0, width:10.0, height:6.0, action:() => openDialog('dlg-worn'), title:"כנפיים שחוקות — פרטים" },
-        // ספר “כנפיים שחוקות” — כפתור ירוק "רכישה"
-        { id:"worn-buy",      left:86.0, top:79.0, width:7.0,  height:6.0, action:() => openBuy('buyWorn'), title:"כנפיים שחוקות — רכישה" }
+  // צמד חמד (באמצע התחתון) — 2 ס״מ שמאלה + 4 ס״מ למטה
+  { id:"twins-details",
+    left:45.0, top:84.0, width:12.0, height:6.0,
+    scale:1, dx_cm:-2, dy_cm:4,
+    action:() => openDialog('dlg-twins'),
+    title:"צמד חמד — פרטים"
+  },
+  { id:"twins-buy",
+    left:57.0, top:84.0, width:7.0,  height:6.0,
+    scale:1, dx_cm:-2, dy_cm:4,
+    action:() => openBuy('buyTwins'),
+    title:"צמד חמד — רכישה"
+  },
+
+  // כנפיים שחוקות (הימני) — 1 ס״מ ימינה + 3 ס״מ למעלה
+  { id:"worn-details",
+    left:77.0, top:79.0, width:10.0, height:6.0,
+    scale:1, dx_cm:1, dy_cm:-3,
+    action:() => openDialog('dlg-worn'),
+    title:"כנפיים שחוקות — פרטים"
+  },
+  { id:"worn-buy",
+    left:86.0, top:79.0, width:7.0,  height:6.0,
+    scale:1, dx_cm:1, dy_cm:-3,
+    action:() => openBuy('buyWorn'),
+    title:"כנפיים שחוקות — רכישה"
+  }
       ];
 
       /* בניית רשימת הנסיונות לטעינת התמונה הראשית */
@@ -289,5 +331,6 @@
   </script>
 </body>
 </html>
+
 
 
