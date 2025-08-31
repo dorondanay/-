@@ -1,190 +1,162 @@
 <!DOCTYPE html>
-<html lang="he">
+<html lang="he" dir="rtl">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>האתר של דורון דנאי</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>האתר של דורון דנאי — Master Page</title>
+  <meta name="color-scheme" content="light dark" />
   <style>
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background-color: black;
-      overflow: hidden;
+    :root { --bg:#000; --fg:#f4f4f4; --muted:#aaa; --ok:#a9f3a9; --bad:#ff9b9b; }
+    html, body { margin:0; height:100%; background:var(--bg); color:var(--fg); overflow:hidden; }
+    .stage { position:fixed; inset:0; display:grid; place-items:center; background:var(--bg); }
+    img#master { max-width:100vw; max-height:100vh; object-fit:contain; display:none; }
+    .panel {
+      position:fixed; inset-inline-start:10px; inset-block-start:10px;
+      width:min(560px,92vw); max-height:62vh; overflow:auto;
+      background:rgba(0,0,0,.62); border:1px solid rgba(255,255,255,.15);
+      border-radius:12px; padding:10px 12px; font:13px/1.45 system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial;
+      backdrop-filter: blur(4px);
     }
-    .bg {
-      position: fixed;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
-      object-fit: cover;
-      z-index: -1;
+    .panel h3 { margin:4px 0 8px; font-size:14px; }
+    .attempts { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace; white-space:nowrap; }
+    .ok { color:var(--ok); }
+    .bad { color:var(--bad); }
+    .hint {
+      position:fixed; inset-inline-start:10px; inset-block-end:10px;
+      display:grid; grid-template-columns:1fr auto auto; gap:6px; align-items:center;
+      background:rgba(0,0,0,.62); border:1px solid rgba(255,255,255,.15); border-radius:12px;
+      padding:8px 10px; font:13px/1.45 system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial;
+      width:min(540px,95vw);
     }
-    .hotspot {
-      position: absolute;
-      cursor: pointer;
+    .hint input {
+      width:100%; background:rgba(255,255,255,.06); border:1px solid rgba(255,255,255,.18);
+      color:var(--fg); border-radius:10px; padding:8px 10px; font:inherit;
     }
-    .modal {
-      display: none;
-      position: fixed;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
-      background: rgba(0,0,0,0.8);
-      justify-content: center;
-      align-items: center;
-      z-index: 1000;
-    }
-    .modal-content {
-      background: white;
-      padding: 20px;
-      border-radius: 12px;
-      max-width: 90%;
-      max-height: 90%;
-      overflow: auto;
-    }
-    .close-btn {
-      position: absolute;
-      top: 10px; right: 20px;
-      font-size: 28px;
-      cursor: pointer;
-    }
+    .hint button { padding:8px 12px; border-radius:10px; border:1px solid rgba(255,255,255,.18); background:rgba(255,255,255,.08); color:var(--fg); cursor:pointer; }
+    .hint .ver { padding-inline:10px; opacity:.75; user-select:none; }
+    .hidden { display:none !important; }
+    .logo { position:fixed; inset-inline-end:10px; inset-block-start:10px; font-size:12px; opacity:.7; }
   </style>
 </head>
 <body>
-  <img/Master_Page_GO_VEHAURHO.jpg
+  <div class="stage"><img id="master" alt="Master Page"></div>
 
-  <!-- ספרים -->
-  <div id="book-knafayim" class="hotspot" 
-       style="left:61.7%; top:68.7%; width:17.1%; height:7.6%;"
-       onclick="openModal('modal-knafayim')"></div>
-
-  <div id="book-twins" class="hotspot" 
-       style="left:73%; top:94.4%; width:14.3%; height:6.5%;"
-       onclick="openModal('modal-twins')"></div>
-
-  <div id="book-worn" class="hotspot" 
-       style="left:80.8%; top:67.3%; width:16.7%; height:7.2%;"
-       onclick="openModal('modal-worn')"></div>
-
-  <!-- הרצאות -->
-  <div id="talks-safety" class="hotspot" 
-       style="left:20.2%; top:6.5%; width:22.3%; height:36.7%;"
-       onclick="openModal('modal-safety')"></div>
-
-  <div id="talks-life" class="hotspot" 
-       style="left:20%; top:47.3%; width:22.6%; height:40.8%;"
-       onclick="openModal('modal-life')"></div>
-
-  <!-- אימון אישי -->
-  <div id="coaching-offer" class="hotspot"
-       style="left:18.9%; top:6.3%; width:12.4%; height:7.8%;"
-       onclick="openModal('modal-coaching')"></div>
-
-  <div id="coaching-reels" class="hotspot"
-       style="left:19.1%; top:15.8%; width:12.1%; height:7.5%;"
-       onclick="openModal('modal-reels')"></div>
-
-  <div id="coaching-contact" class="hotspot"
-       style="left:39.7%; top:1%; width:29%; height:9.2%;"
-       onclick="openModal('modal-contact')"></div>
-
-  <div id="coaching-back" class="hotspot"
-       style="left:68.9%; top:4.4%; width:13%; height:10%;"
-       onclick="closeAll()"></div>
-  <!-- חלונות קופצים (מודאלים) -->
-  <div id="modal-knafayim" class="modal">
-    <div class="modal-content">
-      <span class="close-btn" onclick="closeModal('modal-knafayim')">&times;</span>
-      <h2>כנפיים שחוקות</h2>
-      <p>הספר אזל מהמלאי.</p>
+  <div class="panel" id="panel">
+    <h3>טוען "Master Page.jpg"…</h3>
+    <div>ניסיונות טעינה (לפי סדר):</div>
+    <div class="attempts" id="attempts"></div>
+    <div style="margin-top:8px;color:var(--muted)">
+      כל הקבצים אמורים להסתיים ב-<b>.jpg</b> ולשמור על אותיות גדולות/קטנות ורווחים בדיוק כמו ברשימה שסיפקת.
+      אם שינית שם/תיקייה — השתמש בבודק הידני למטה או עדכן את שם הקובץ בריפו.
     </div>
   </div>
-
-  <div id="modal-twins" class="modal">
-    <div class="modal-content">
-      <span class="close-btn" onclick="closeModal('modal-twins')">&times;</span>
-      <h2>צמד חמד</h2>
-      <p>מחיר: 72 ₪</p>
-      <a href="https://www.meshulam.co.il/purchase?b=twins-link" target="_blank">לרכישה באתר מאובטח</a>
-    </div>
+  <div class="hint">
+    <input id="manual" placeholder="בדיקה ידנית: הקלד/י נתיב מדויק, למשל img/Master Page.jpg">
+    <button id="tryBtn">נסה</button>
+    <button id="bump">Bump v</button>
+    <span class="ver" id="vshow">v=601</span>
   </div>
 
-  <div id="modal-worn" class="modal">
-    <div class="modal-content">
-      <span class="close-btn" onclick="closeModal('modal-worn')">&times;</span>
-      <h2>Worn Wings</h2>
-      <p>מחיר: 76 ₪</p>
-      <a href="https://www.meshulam.co.il/purchase?b=worn-link" target="_blank">לרכישה באתר מאובטח</a>
-    </div>
-  </div>
-
-  <div id="modal-safety" class="modal">
-    <div class="modal-content">
-      <span class="close-btn" onclick="closeModal('modal-safety')">&times;</span>
-      <h2>תרבות הבטיחות</h2>
-      <p>הרצאה אינטראקטיבית בנושא השוואה בין תעופה לבטיחות בעבודה.</p>
-      <button onclick="openModal('modal-contact')">צור קשר</button>
-    </div>
-  </div>
-
-  <div id="modal-life" class="modal">
-    <div class="modal-content">
-      <span class="close-btn" onclick="closeModal('modal-life')">&times;</span>
-      <h2>התפקחות מאשליות החיים</h2>
-      <p>הרצאה מרתקת בנושא החיים והבחירות שלנו.</p>
-      <button onclick="openModal('modal-contact')">צור קשר</button>
-    </div>
-  </div>
-  <div id="modal-coaching" class="modal">
-    <div class="modal-content">
-      <span class="close-btn" onclick="closeModal('modal-coaching')">&times;</span>
-      <h2>אימון אישי</h2>
-      <p>מסלול ייחודי של 8 מפגשים ראשוניים בסביבת ים שקטה בקפריסין והמשך ליווי בישראל.</p>
-      <button onclick="openModal('modal-contact')">צור קשר</button>
-    </div>
-  </div>
-
-  <div id="modal-reels" class="modal">
-    <div class="modal-content">
-      <span class="close-btn" onclick="closeModal('modal-reels')">&times;</span>
-      <h2>REELS</h2>
-      <p>ארבע מסגרות וידאו קצרות יוצגו כאן בהמשך.</p>
-    </div>
-  </div>
-
-  <div id="modal-contact" class="modal">
-    <div class="modal-content">
-      <span class="close-btn" onclick="closeModal('modal-contact')">&times;</span>
-      <h2>צור קשר</h2>
-      <form action="mailto:danaydoron@gmail.com" method="post" enctype="text/plain">
-        <label>שם: <input type="text" name="name"></label><br><br>
-        <label>אימייל: <input type="email" name="email"></label><br><br>
-        <label>הודעה:<br><textarea name="message" rows="4"></textarea></label><br><br>
-        <button type="submit">שלח</button>
-      </form>
-    </div>
-  </div>
+  <div class="logo">© Doron Danay</div>
 
   <script>
-    function openModal(id) {
-      document.getElementById(id).style.display = "flex";
-    }
-    function closeModal(id) {
-      document.getElementById(id).style.display = "none";
-    }
-    function closeAll() {
-      document.querySelectorAll('.modal').forEach(m => m.style.display = "none");
-    }
-    window.onclick = function(event) {
-      document.querySelectorAll('.modal').forEach(m => {
-        if (event.target === m) m.style.display = "none";
+    (function() {
+      const attemptsEl = document.getElementById('attempts');
+      const img = document.getElementById('master');
+      const panel = document.getElementById('panel');
+      const manual = document.getElementById('manual');
+      const tryBtn = document.getElementById('tryBtn');
+      const bump = document.getElementById('bump');
+      const vshow = document.getElementById('vshow');
+
+      let v = 601;
+
+      // exact names as provided (always .jpg, keep spaces & case)
+      const exactFiles = [
+        "Master Page.jpg",       // primary hero
+        "coaching master.jpg",
+        "Wings back.jpg",
+        "Twins back.jpg",
+        "Thats life final.jpg",
+        "Talks.jpg",
+        "Worn Wings back.jpg",
+        "Wings front.jpg"
+      ];
+
+      // folders to try (exact case)
+      const folders = ["", "img/", "IMG/", "images/", "Images/"];
+      // Build candidate list: try Master Page first across all folders, then others
+      const candidates = [];
+      for (const folder of folders) candidates.push(folder + exactFiles[0]);
+      for (let i = 1; i < exactFiles.length; i++) {
+        for (const folder of folders) candidates.push(folder + exactFiles[i]);
+      }
+
+      function addLine(text, ok=false) {
+        const div = document.createElement('div');
+        div.textContent = (ok ? "✓ " : "× ") + text;
+        div.className = ok ? "ok" : "bad";
+        attemptsEl.appendChild(div);
+        attemptsEl.scrollTop = attemptsEl.scrollHeight;
+      }
+
+      function tryLoad(srcList, idx=0) {
+        if (idx >= srcList.length) {
+          addLine("לא נמצאה תמונה תואמת. בדוק שהקבצים באמת .jpg ושמותיהם מדויקים.", false);
+          panel.querySelector('h3').textContent = "שגיאה: לא נמצאה תמונה";
+          return;
+        }
+        const raw = srcList[idx];
+        const url = `${raw}?v=${v}`;
+        const testImg = new Image();
+        let settled = false;
+
+        const onFail = () => {
+          if (settled) return;
+          settled = true;
+          addLine(url, false);
+          tryLoad(srcList, idx+1);
+        };
+        const onOk = () => {
+          if (settled) return;
+          settled = true;
+          addLine(url, true);
+          img.src = url;
+          img.style.display = 'block';
+          panel.classList.add('hidden');
+          document.title = "האתר של דורון דנאי — " + raw.replace(/\?.*$/, "");
+        };
+
+        testImg.onload = () => (testImg.naturalWidth ? onOk() : onFail());
+        testImg.onerror = onFail;
+        const T = setTimeout(onFail, 6000);
+        testImg.onloadend = () => clearTimeout(T);
+        testImg.src = url;
+      }
+      // Manual tester
+      tryBtn.addEventListener('click', () => {
+        const path = manual.value.trim();
+        if (!path) return;
+        attemptsEl.innerHTML = "";
+        panel.classList.remove('hidden');
+        img.style.display = 'none';
+        tryLoad([path]);
       });
-    }
+
+      // Bump cache-busting version
+      bump.addEventListener('click', () => {
+        v += 1;
+        vshow.textContent = `v=${v}`;
+        // Re-try from start using the bumped version
+        attemptsEl.innerHTML = "";
+        panel.classList.remove('hidden');
+        img.style.display = 'none';
+        tryLoad(candidates);
+      });
+
+      // Kickoff
+      tryLoad(candidates);
+    })();
   </script>
 </body>
 </html>
-
-
-
-
-
-
-
