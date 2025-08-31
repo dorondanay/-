@@ -132,6 +132,55 @@
       <button onclick="openModal('modal-contact')">צור קשר</button>
     </div>
   </div>
+  <div id="modal-coaching" class="modal">
+    <div class="modal-content">
+      <span class="close-btn" onclick="closeModal('modal-coaching')">&times;</span>
+      <h2>אימון אישי</h2>
+      <p>מסלול ייחודי של 8 מפגשים ראשוניים בסביבת ים שקטה בקפריסין והמשך ליווי בישראל.</p>
+      <button onclick="openModal('modal-contact')">צור קשר</button>
+    </div>
+  </div>
+
+  <div id="modal-reels" class="modal">
+    <div class="modal-content">
+      <span class="close-btn" onclick="closeModal('modal-reels')">&times;</span>
+      <h2>REELS</h2>
+      <p>ארבע מסגרות וידאו קצרות יוצגו כאן בהמשך.</p>
+    </div>
+  </div>
+
+  <div id="modal-contact" class="modal">
+    <div class="modal-content">
+      <span class="close-btn" onclick="closeModal('modal-contact')">&times;</span>
+      <h2>צור קשר</h2>
+      <form action="mailto:danaydoron@gmail.com" method="post" enctype="text/plain">
+        <label>שם: <input type="text" name="name"></label><br><br>
+        <label>אימייל: <input type="email" name="email"></label><br><br>
+        <label>הודעה:<br><textarea name="message" rows="4"></textarea></label><br><br>
+        <button type="submit">שלח</button>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    function openModal(id) {
+      document.getElementById(id).style.display = "flex";
+    }
+    function closeModal(id) {
+      document.getElementById(id).style.display = "none";
+    }
+    function closeAll() {
+      document.querySelectorAll('.modal').forEach(m => m.style.display = "none");
+    }
+    window.onclick = function(event) {
+      document.querySelectorAll('.modal').forEach(m => {
+        if (event.target === m) m.style.display = "none";
+      });
+    }
+  </script>
+</body>
+</html>
+
 
 
 
