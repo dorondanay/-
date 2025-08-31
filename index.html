@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>האתר של דורון דנאי — Master Page (v901)</title>
+  <title>האתר של דורון דנאי — Master Page</title>
   <meta name="color-scheme" content="light dark" />
   <style>
     :root { --bg:#000; --fg:#f4f4f4; --muted:#aaa; --ok:#a9f3a9; --bad:#ff9b9b; }
@@ -11,9 +11,9 @@
     .stage { position:fixed; inset:0; display:grid; place-items:center; background:var(--bg); }
     img#master { max-width:100vw; max-height:100vh; object-fit:contain; display:none; }
 
-    /* פאנל דיאגנוסטיקה */
+    /* לוח ניסיונות טעינת התמונה */
     .panel {
-      position:fixed; inset-inline-start:10px; inset-block-start:10px; z-index:1000;
+      position:fixed; inset-inline-start:10px; inset-block-start:10px;
       width:min(560px,92vw); max-height:62vh; overflow:auto;
       background:rgba(0,0,0,.62); border:1px solid rgba(255,255,255,.15);
       border-radius:12px; padding:10px 12px; font:13px/1.45 system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial;
@@ -26,7 +26,7 @@
 
     /* סרגל בדיקה ידנית ושבירת קאש */
     .hint {
-      position:fixed; inset-inline-start:10px; inset-block-end:10px; z-index:1000;
+      position:fixed; inset-inline-start:10px; inset-block-end:10px;
       display:grid; grid-template-columns:1fr auto auto; gap:6px; align-items:center;
       background:rgba(0,0,0,.62); border:1px solid rgba(255,255,255,.15); border-radius:12px;
       padding:8px 10px; font:13px/1.45 system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial;
@@ -41,40 +41,42 @@
     .hidden { display:none !important; }
 
     /* שכבת ה-HOTSPOTS */
-    .hotspots { position:fixed; inset:0; pointer-events:none; z-index:500; }
+    .hotspots { position:fixed; inset:0; pointer-events:none; }
     .hotspot {
       position:absolute; pointer-events:auto; cursor:pointer;
       outline: none; text-decoration:none;
-      /* DEBUG (לכייל ואז לכבות): */
+      /* להדגשת המסגרות זמנית, בטל הערות: */
       /* background: rgba(0,255,255,.18); border: 1px dashed rgba(0,255,255,.6); */
     }
     .hotspot:focus-visible { outline: 2px solid #7cc1ff; outline-offset: 2px; }
 
     /* חלונות פרטים */
-    dialog.modal { border: none; padding: 0; background: transparent; }
+    dialog.modal {
+      border: none; padding: 0; background: transparent;
+    }
     dialog::backdrop { background: rgba(0,0,0,.6); }
     .dlg {
       position: fixed; inset: 5% 5% auto 5%;
       background: #111; color:#f5f5f5; border-radius: 14px; box-shadow: 0 10px 40px rgba(0,0,0,.6);
       max-width: 90vw; max-height: 90vh; overflow: hidden; display: grid; grid-template-rows: auto 1fr auto;
     }
-    .dlg-head { padding: 10px 14px; display:flex; align-items:center; justify-content:space-between; border-bottom: 1px solid rgba(255,255,255,.12); }
+    .dlg-head {
+      padding: 10px 14px; display:flex; align-items:center; justify-content:space-between;
+      border-bottom: 1px solid rgba(255,255,255,.12);
+    }
     .dlg-body { padding: 10px; overflow:auto; background:#000; }
     .dlg-body img { max-width:100%; height:auto; display:block; margin: 0 auto; object-fit: contain; }
-    .dlg-foot { padding: 10px; display:flex; gap:8px; justify-content:flex-end; border-top: 1px solid rgba(255,255,255,.12); background:#111; }
-    .btn { padding: 8px 12px; border-radius: 10px; border: 1px solid rgba(255,255,255,.18); background: rgba(255,255,255,.06); color: #fff; cursor: pointer; text-decoration: none; display:inline-flex; align-items:center; gap:6px; }
+    .dlg-foot {
+      padding: 10px; display:flex; gap:8px; justify-content:flex-end;
+      border-top: 1px solid rgba(255,255,255,.12); background:#111;
+    }
+    .btn {
+      padding: 8px 12px; border-radius: 10px; border: 1px solid rgba(255,255,255,.18);
+      background: rgba(255,255,255,.06); color: #fff; cursor: pointer; text-decoration: none; display:inline-flex; align-items:center; gap:6px;
+    }
     .btn.primary { background: rgba(0,153,255,.25); }
     .btn.green { background: rgba(0,180,0,.28); }
-    .logo { position:fixed; inset-inline-end:10px; inset-block-start:10px; font-size:12px; opacity:.7; z-index:1000; }
-
-    /* תווית "אזל מהחנויות" */
-    .out-wrap { position: relative; }
-    .out-wrap img { display:block; max-width:100%; height:auto; margin:0 auto; }
-    .soldout { position: absolute; inset-inline-end: 12px; top: 12px; background: rgba(0,0,0,.7); color:#fff; border:2px solid #fff; padding: 8px 12px; font-weight: 800; border-radius: 10px; }
-
-    /* מסך שגיאה כולל -->
-    .fatal { position:fixed; inset:0; display:none; place-items:center; z-index:2000; background:rgba(0,0,0,.85); color:#fff; text-align:center; padding:2rem; }
-    .fatal.visible { display:grid; }
+    .logo { position:fixed; inset-inline-end:10px; inset-block-start:10px; font-size:12px; opacity:.7; }
   </style>
 </head>
 <body>
@@ -85,26 +87,28 @@
     <div>ניסיונות טעינה (לפי סדר):</div>
     <div class="attempts" id="attempts"></div>
     <div style="margin-top:8px;color:var(--muted)">
-      כל הקבצים הם ‎.jpg‎ עם רווחים בדיוק לפי שמותיך. אם משהו לא נטען — ראה יומן למטה או בדוק ידנית.
+      כל הקבצים אמורים להסתיים ב-<b>.jpg</b> ולשמור על אותיות גדולות/קטנות ורווחים בדיוק כמו ברשימה שסיפקת.
+      אם שינית שם/תיקייה — השתמש בבודק הידני למטה או עדכן את שם הקובץ בריפו.
     </div>
   </div>
   <div class="hint">
-    <input id="manual" placeholder="בדיקה ידנית: img/Master Page.jpg או Master Page.jpg">
+    <input id="manual" placeholder="בדיקה ידנית: הקלד/י נתיב מדויק, למשל img/Master Page.jpg">
     <button id="tryBtn">נסה</button>
     <button id="bump">Bump v</button>
-    <span class="ver" id="vshow">v=901</span>
+    <span class="ver" id="vshow">v=801</span>
   </div>
 
   <div class="logo">© Doron Danay</div>
 
+  <!-- שכבת ה-HOTSPOTS -->
   <div class="hotspots" id="hotspots" aria-label="אזורי לחיצה שקופים"></div>
 
-  <!-- דיאלוגים -->
+  <!-- חלונות פרטים -->
   <dialog id="dlg-coach" class="modal"><div class="dlg">
     <div class="dlg-head"><b>אימון אישי — פרטים</b><button class="btn" onclick="this.closest('dialog').close()">סגור</button></div>
     <div class="dlg-body"><img src="coaching master.jpg" alt="אימון אישי"></div>
     <div class="dlg-foot">
-      <a class="btn primary" href="mailto:danaydoron@gmail.com?subject=%D7%90%D7%99%D7%9E%D7%95%D7%9F%20%D7%90%D7%99%D7%A9%D7%99&body=%D7%94%D7%99%D7%99%20%D7%93%D7%95%D7%A8%D7%95%D7%9F%2C%20%D7%9E%D7%A2%D7%95%D7%A0%D7%99%D7%99%D7%9F%2F%D7%AA%20%D7%91%D7%98%D7%99%D7%90%D7%95%D7%9D." target="_blank" rel="noopener">יצירת קשר</a>
+      <a class="btn primary" href="mailto:danaydoron@gmail.com?subject=%D7%90%D7%99%D7%9E%D7%95%D7%9F%20%D7%90%D7%99%D7%A9%D7%99&body=%D7%94%D7%99%D7%99%20%D7%93%D7%95%D7%A8%D7%95%D7%9F,%0A%D7%9E%D7%A2%D7%95%D7%A0%D7%99%D7%99%D7%9F/%D7%AA%20%D7%91%D7%A4%D7%A8%D7%98%D7%99%D7%9D%20%D7%A0%D7%95%D7%A1%D7%A4%D7%99%D7%9D%20%D7%A2%D7%9C%20%D7%90%D7%99%D7%9E%D7%95%D7%9F%20%D7%90%D7%99%D7%A9%D7%99." target="_blank" rel="noopener">יצירת קשר</a>
       <a class="btn" href="tel:+972542479911">☎ 054-2479911</a>
     </div>
   </div></dialog>
@@ -113,7 +117,7 @@
     <div class="dlg-head"><b>סדנאות/הרצאות — פרטים</b><button class="btn" onclick="this.closest('dialog').close()">סגור</button></div>
     <div class="dlg-body"><img src="Talks.jpg" alt="סדנאות/הרצאות"></div>
     <div class="dlg-foot">
-      <a class="btn primary" href="mailto:danaydoron@gmail.com?subject=%D7%94%D7%A8%D7%A6%D7%90%D7%95%D7%AA%2F%D7%A1%D7%93%D7%A0%D7%90%D7%95%D7%AA%20-%20%D7%AA%D7%99%D7%90%D7%95%D7%9D" target="_blank" rel="noopener">יצירת קשר</a>
+      <a class="btn primary" href="mailto:danaydoron@gmail.com?subject=%D7%94%D7%A8%D7%A6%D7%90%D7%95%D7%AA%2F%D7%A1%D7%93%D7%A0%D7%90%D7%95%D7%AA%20-%20%D7%AA%D7%99%D7%90%D7%95%D7%9D&body=%D7%94%D7%99%D7%99%20%D7%93%D7%95%D7%A8%D7%95%D7%9F%2C%0A%D7%A0%D7%A9%D7%9E%D7%97%2F%D7%A0%D7%A9%D7%9E%D7%97%D7%94%20%D7%9C%D7%A4%D7%A8%D7%98%D7%99%D7%9D%20%D7%95%D7%AA%D7%90%D7%9D." target="_blank" rel="noopener">יצירת קשר</a>
       <a class="btn" href="tel:+972542479911">☎ 054-2479911</a>
     </div>
   </div></dialog>
@@ -136,197 +140,143 @@
     </div>
   </div></dialog>
 
-  <!-- כנפיים (Wings) -->
-  <dialog id="dlg-wings" class="modal"><div class="dlg">
-    <div class="dlg-head"><b>כנפיים — פרטים</b><button class="btn" onclick="this.closest('dialog').close()">סגור</button></div>
-    <div class="dlg-body"><img src="Wings back.jpg" alt="כנפיים — פרטים"></div>
-    <div class="dlg-foot">
-      <a class="btn" href="mailto:danaydoron@gmail.com?subject=%D7%9B%D7%A0%D7%A4%D7%99%D7%99%D7%9D%20-%20%D7%A4%D7%A8%D7%98%D7%99%D7%9D">יצירת קשר</a>
-    </div>
-  </div></dialog>
-
-  <dialog id="dlg-wings-buy" class="modal"><div class="dlg">
-    <div class="dlg-head"><b>כנפיים — רכישה</b><button class="btn" onclick="this.closest('dialog').close()">סגור</button></div>
-    <div class="dlg-body">
-      <div class="out-wrap">
-        <img src="Wings front.jpg" alt="כנפיים — כריכה קדמית">
-        <div class="soldout">אזל מהחנויות</div>
-      </div>
-    </div>
-    <div class="dlg-foot">
-      <a class="btn" href="mailto:danaydoron@gmail.com?subject=%D7%9B%D7%A0%D7%A4%D7%99%D7%99%D7%9D%20-%20%D7%91%D7%A7%D7%A9%D7%AA%20%D7%A2%D7%93%D7%9B%D7%95%D7%9F%20%D7%A2%D7%9C%20%D7%9E%D7%9C%D7%90%D7%99">עדכן אותי כשחוזר למלאי</a>
-    </div>
-  </div></dialog>
-
-  <div id="fatal" class="fatal"><div>
-    <h2>תקלה בטעינת הקוד</h2>
-    <p id="fatalMsg" style="opacity:.8"></p>
-    <p style="opacity:.7">בדוק שאין הדבקה כפולה או סוגר חסר. נסה לרענן עם Ctrl+F5.</p>
-  </div></div>
   <script>
-  (function() {
-    const attemptsEl = document.getElementById('attempts');
-    const img = document.getElementById('master');
-    const panel = document.getElementById('panel');
-    const manual = document.getElementById('manual');
-    const tryBtn = document.getElementById('tryBtn');
-    const bump = document.getElementById('bump');
-    const vshow = document.getElementById('vshow');
-    const layer = document.getElementById('hotspots');
-    const fatal = document.getElementById('fatal');
-    const fatalMsg = document.getElementById('fatalMsg');
+    (function() {
+      const attemptsEl = document.getElementById('attempts');
+      const img = document.getElementById('master');
+      const panel = document.getElementById('panel');
+      const manual = document.getElementById('manual');
+      const tryBtn = document.getElementById('tryBtn');
+      const bump = document.getElementById('bump');
+      const vshow = document.getElementById('vshow');
+      const layer = document.getElementById('hotspots');
 
-    let v = 901;
+      let v = 801;
 
-    // מסך שחור? נציג שגיאה גלובלית אם JS נופל
-    window.addEventListener('error', (e) => {
-      fatal.classList.add('visible');
-      fatalMsg.textContent = (e && e.message) ? e.message : 'Unknown error';
-    });
+      /* קישורי רכישה — עדכן כאן אם יש שינוי */
+      const LINKS = {
+        // כנפיים שחוקות — על פי מה שסיפקת בעבר (אם שונה, תן לי הקישור המדויק ואעדכן)
+        buyWorn: "https://pay.meshulam.co.il/purchase?b=8dfe116b4b9a656246375c897a49d9a4",
+        // צמד חמד — TODO: ברגע שתספק קישור Meshulam אעדכן כאן
+        buyTwins: ""
+      };
+      /* שמות הקבצים כפי שסיפקת (כולם .jpg) */
+      const exactFiles = [
+        "Master Page.jpg",       // hero
+        "coaching master.jpg",
+        "Wings back.jpg",
+        "Twins back.jpg",
+        "Thats life final.jpg",
+        "Talks.jpg",
+        "Worn Wings back.jpg",
+        "Wings front.jpg"
+      ];
+      const folders = ["", "img/", "IMG/", "images/", "Images/"];
 
-    /* קישורי רכישה */
-    const LINKS = {
-      buyWorn:  "https://pay.meshulam.co.il/purchase?b=8dfe116b4b9a656246375c897a49d9a4",
-      buyTwins: "https://meshulam.co.il/purchase?b=cdb8abab38e7c0d22aa888136a3e4515"
-    };
+      /* HOTSPOTS באחוזים יחסית לתמונה */
+      /* אפשר לכוונן — תגיד “+2% ימינה, -1% למעלה” וכו' ואכוון עבורך. */
+      const hotspots = [
+        // אימון אישי – "פרטים" (שמאל-תחתון)
+        { id:"coach-details", left:12.0, top:73.0, width:12.0, height:7.0, action:() => openDialog('dlg-coach'), title:"אימון אישי — פרטים" },
 
-    /* שמות הקבצים המדויקים (כולם .jpg) */
-    const exactFiles = [
-      "Master Page.jpg",       // hero
-      "coaching master.jpg",
-      "Wings back.jpg",
-      "Twins back.jpg",
-      "Thats life final.jpg",
-      "Talks.jpg",
-      "Worn Wings back.jpg",
-      "Wings front.jpg"
-    ];
-    const folders = ["", "img/", "IMG/", "images/", "Images/"];
+        // הרצאות – "פרטים" (מרכז-תחתון)
+        { id:"talks-details", left:42.0, top:76.0, width:12.0, height:7.0, action:() => openDialog('dlg-talks'), title:"סדנאות/הרצאות — פרטים" },
 
-    /* HOTSPOTS + כיוונונים */
-    const hotspots = [
-      // אימון אישי — אזור גדול ×5 (נשאר במקום, נוכל לדייק אח"כ)
-      { id:"coach-details", left:12.0, top:73.0, width:12.0, height:7.0, scale:5, dx_cm:0, dy_cm:0,  action:() => openDialog('dlg-coach'),  title:"אימון אישי — פרטים" },
+        // ספר “צמד חמד” — כפתור כחול "פרטים"
+        { id:"twins-details", left:61.0, top:71.0, width:10.0, height:6.0, action:() => openDialog('dlg-twins'), title:"צמד חמד — פרטים" },
+        // ספר “צמד חמד” — כפתור ירוק "רכישה"
+        { id:"twins-buy",     left:70.0, top:71.0, width:7.0,  height:6.0, action:() => openBuy('buyTwins'), title:"צמד חמד — רכישה" },
 
-      // הרצאות/סדנאות — אזור גדול ×5
-      { id:"talks-details", left:42.0, top:76.0, width:12.0, height:7.0, scale:5, dx_cm:0, dy_cm:0,  action:() => openDialog('dlg-talks'),  title:"סדנאות/הרצאות — פרטים" },
+        // ספר “כנפיים שחוקות” — כפתור כחול "פרטים"
+        { id:"worn-details",  left:77.0, top:79.0, width:10.0, height:6.0, action:() => openDialog('dlg-worn'), title:"כנפיים שחוקות — פרטים" },
+        // ספר “כנפיים שחוקות” — כפתור ירוק "רכישה"
+        { id:"worn-buy",      left:86.0, top:79.0, width:7.0,  height:6.0, action:() => openBuy('buyWorn'), title:"כנפיים שחוקות — רכישה" }
+      ];
 
-      // כנפיים (הספר האדום) — לעלות בסנטימטר
-      { id:"wings-details", left:61.0, top:71.0, width:10.0, height:6.0, scale:1, dx_cm:0, dy_cm:-1, action:() => openDialog('dlg-wings'),  title:"כנפיים — פרטים" },
-      { id:"wings-buy",     left:70.0, top:71.0, width:7.0,  height:6.0, scale:1, dx_cm:0, dy_cm:-1, action:() => openDialog('dlg-wings-buy'), title:"כנפיים — רכישה" },
-
-      // צמד חמד — 2 ס״מ שמאלה, 4 ס״מ למטה
-      { id:"twins-details", left:61.0, top:71.0, width:10.0, height:6.0, scale:1, dx_cm:-2, dy_cm:4, action:() => openDialog('dlg-twins'),  title:"צמד חמד — פרטים" },
-      { id:"twins-buy",     left:70.0, top:71.0, width:7.0,  height:6.0, scale:1, dx_cm:-2, dy_cm:4, action:() => openBuy('buyTwins'),     title:"צמד חמד — רכישה" },
-
-      // כנפיים שחוקות (הימני) — 1 ס״מ ימינה, 3 ס״מ למעלה
-      { id:"worn-details",  left:77.0, top:79.0, width:10.0, height:6.0, scale:1, dx_cm:1, dy_cm:-3, action:() => openDialog('dlg-worn'),   title:"כנפיים שחוקות — פרטים" },
-      { id:"worn-buy",      left:86.0, top:79.0, width:7.0,  height:6.0, scale:1, dx_cm:1, dy_cm:-3, action:() => openBuy('buyWorn'),      title:"כנפיים שחוקות — רכישה" }
-    ];
-
-    /* רשימת נסיונות לטעינת התמונה הראשית */
-    const candidates = [];
-    for (const folder of folders) candidates.push(folder + exactFiles[0]);
-    for (let i = 1; i < exactFiles.length; i++) for (const folder of folders) candidates.push(folder + exactFiles[i]);
-
-    function addLine(text, ok=false) {
-      const div = document.createElement('div');
-      div.textContent = (ok ? "✓ " : "× ") + text;
-      div.className = ok ? "ok" : "bad";
-      attemptsEl.appendChild(div);
-      attemptsEl.scrollTop = attemptsEl.scrollHeight;
-    }
-    function tryLoad(srcList, idx=0) {
-      if (idx >= srcList.length) {
-        addLine("לא נמצאה תמונה תואמת. ודא שהשמות/מיקום תואמים.", false);
-        panel.querySelector('h3').textContent = "שגיאה: לא נמצאה תמונה";
-        return;
+      /* בניית רשימת הנסיונות לטעינת התמונה הראשית */
+      const candidates = [];
+      for (const folder of folders) candidates.push(folder + exactFiles[0]);
+      for (let i = 1; i < exactFiles.length; i++) {
+        for (const folder of folders) candidates.push(folder + exactFiles[i]);
       }
-      const raw = srcList[idx];
-      const url = `${raw}?v=${v}`;
-      const testImg = new Image();
-      let settled = false;
 
-      const onFail = () => { if (settled) return; settled = true; addLine(url, false); tryLoad(srcList, idx+1); };
-      const onOk   = () => {
-        if (settled) return; settled = true; addLine(url, true);
-        img.src = url; img.style.display = 'block'; panel.classList.add('hidden');
-        document.title = "האתר של דורון דנאי — " + raw.replace(/\?.*$/, "") + " (v901)";
-        requestAnimationFrame(layoutHotspots);
-        window.addEventListener('resize', layoutHotspots);
+      function addLine(text, ok=false) {
+        const div = document.createElement('div');
+        div.textContent = (ok ? "✓ " : "× ") + text;
+        div.className = ok ? "ok" : "bad";
+        attemptsEl.appendChild(div);
+        attemptsEl.scrollTop = attemptsEl.scrollHeight;
+      }
+      function tryLoad(srcList, idx=0) {
+        if (idx >= srcList.length) {
+          addLine("לא נמצאה תמונה תואמת. בדוק שהקבצים באמת .jpg ושמותיהם מדויקים.", false);
+          panel.querySelector('h3').textContent = "שגיאה: לא נמצאה תמונה";
+          return;
+        }
+        const raw = srcList[idx];
+        const url = `${raw}?v=${v}`;
+        const testImg = new Image();
+        let settled = false;
+
+        const onFail = () => { if (settled) return; settled = true; addLine(url, false); tryLoad(srcList, idx+1); };
+        const onOk   = () => {
+          if (settled) return; settled = true; addLine(url, true);
+          img.src = url; img.style.display = 'block'; panel.classList.add('hidden');
+          document.title = "האתר של דורון דנאי — " + raw.replace(/\?.*$/, "");
+          requestAnimationFrame(layoutHotspots);
+          window.addEventListener('resize', layoutHotspots);
+        };
+
+        testImg.onload = () => (testImg.naturalWidth ? onOk() : onFail());
+        testImg.onerror = onFail;
+        const T = setTimeout(onFail, 6000);
+        testImg.onloadend = () => clearTimeout(T);
+        testImg.src = url;
+      }
+
+      /* שרטוט המסגרות על התמונה (לפי bounding rect של התמונה) */
+      function layoutHotspots() {
+        const r = img.getBoundingClientRect();
+        const layer = document.getElementById('hotspots');
+        layer.innerHTML = "";
+        hotspots.forEach(h => {
+          const el = document.createElement('a');
+          el.className = 'hotspot';
+          el.setAttribute('aria-label', h.title);
+          el.title = h.title;
+          el.style.left   = (r.left + (h.left/100)*r.width) + 'px';
+          el.style.top    = (r.top  + (h.top /100)*r.height) + 'px';
+          el.style.width  = ((h.width /100)*r.width) + 'px';
+          el.style.height = ((h.height/100)*r.height) + 'px';
+          el.href = "javascript:void(0)";
+          el.onclick = (e) => { e.preventDefault(); h.action && h.action(); };
+          layer.appendChild(el);
+        });
+      }
+
+      /* פתיחת חלונות וקישורי רכישה */
+      window.openDialog = (id) => { document.getElementById(id)?.showModal(); };
+      window.openBuy = (key) => {
+        const url = (LINKS[key]||"").trim();
+        if (!url) { alert("קישור רכישה עדיין לא הוגדר. שלח לי את הקישור ואעדכן."); return; }
+        window.open(url, "_blank", "noopener");
       };
 
-      testImg.onload = () => (testImg.naturalWidth ? onOk() : onFail());
-      testImg.onerror = onFail;
-      const T = setTimeout(onFail, 6000);
-      testImg.onloadend = () => clearTimeout(T);
-      testImg.src = url;
-    }
-
-    /* פריסת מסגרות (תומך scale והזזות ס"מ) */
-    function layoutHotspots() {
-      const r = img.getBoundingClientRect();
-      const layer = document.getElementById('hotspots');
-      const CM = 96 / 2.54; // 1cm ≈ 37.795px
-
-      layer.innerHTML = "";
-      hotspots.forEach(h => {
-        const scale = h.scale || 1;
-
-        const w0  = (h.width  / 100) * r.width;
-        const h0  = (h.height / 100) * r.height;
-
-        const cx  = r.left + ((h.left + h.width/2)  / 100) * r.width;
-        const cy  = r.top  + ((h.top  + h.height/2) / 100) * r.height;
-
-        const w   = w0 * scale;
-        const hpx = h0 * scale;
-
-        const dx  = (h.dx_cm || 0) * CM;
-        const dy  = (h.dy_cm || 0) * CM;
-
-        const left = cx - w/2 + dx;
-        const top  = cy - hpx/2 + dy;
-
-        const el = document.createElement('a');
-        el.className = 'hotspot';
-        el.setAttribute('aria-label', h.title);
-        el.title = h.title;
-        el.style.left   = left + 'px';
-        el.style.top    = top  + 'px';
-        el.style.width  = w    + 'px';
-        el.style.height = hpx  + 'px';
-        el.href = "javascript:void(0)";
-        el.onclick = (e) => { e.preventDefault(); h.action && h.action(); };
-        layer.appendChild(el);
+      // בדיקה ידנית וכפתור Bump
+      document.getElementById('tryBtn').addEventListener('click', () => {
+        const path = manual.value.trim(); if (!path) return;
+        attemptsEl.innerHTML = ""; panel.classList.remove('hidden'); img.style.display = 'none';
+        tryLoad([path]);
       });
-    }
+      document.getElementById('bump').addEventListener('click', () => {
+        v += 1; vshow.textContent = `v=${v}`;
+        attemptsEl.innerHTML = ""; panel.classList.remove('hidden'); img.style.display = 'none';
+        tryLoad(candidates);
+      });
 
-    // קישורי פעולה
-    window.openDialog = (id) => { document.getElementById(id)?.showModal(); };
-    window.openBuy = (key) => {
-      const url = (LINKS[key]||"").trim();
-      if (!url) { alert("קישור רכישה עדיין לא הוגדר."); return; }
-      window.open(url, "_blank", "noopener");
-    };
-
-    // בדיקה ידנית + Bump
-    tryBtn.addEventListener('click', () => {
-      const path = manual.value.trim(); if (!path) return;
-      attemptsEl.innerHTML = ""; panel.classList.remove('hidden'); img.style.display = 'none';
-      tryLoad([path]);
-    });
-    bump.addEventListener('click', () => {
-      v += 1; vshow.textContent = `v=${v}`;
-      attemptsEl.innerHTML = ""; panel.classList.remove('hidden'); img.style.display = 'none';
+      // התחלה
       tryLoad(candidates);
-    });
-
-    // התחלה
-    try { tryLoad(candidates); } catch (e) {
-      fatal.classList.add('visible'); fatalMsg.textContent = e.message || String(e);
-    }
-  })();
+    })();
   </script>
 </body>
 </html>
