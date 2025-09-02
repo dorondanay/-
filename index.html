@@ -11,9 +11,6 @@
     .stage { position:fixed; inset:0; display:grid; place-items:center; background:var(--bg); }
     img#master { max-width:100vw; max-height:100vh; object-fit:contain; display:none; }
 
-
-
-
     /* שכבת ה-HOTSPOTS */
     .hotspots { position:fixed; inset:0; pointer-events:none; }
     .hotspot {
@@ -56,14 +53,6 @@
 <body>
   <div class="stage"><img id="master" alt="Master Page"></div>
 
-  <div class="panel" id="panel">
-    <h3>טוען "Master Page.jpg"…</h3>
-    <div>ניסיונות טעינה (לפי סדר):</div>
-    <div class="attempts" id="attempts"></div>
-    <div style="margin-top:8px;color:var(--muted)">
-      כל הקבצים אמורים להסתיים ב-<b>.jpg</b> ולשמור על אותיות גדולות/קטנות ורווחים בדיוק כמו ברשימה שסיפקת.
-      אם שינית שם/תיקייה — השתמש בבודק הידני למטה או עדכן את שם הקובץ בריפו.
-    </div>
   </div>
   <div class="hint">
     <input id="manual" placeholder="בדיקה ידנית: הקלד/י נתיב מדויק, למשל img/Master Page.jpg">
@@ -151,7 +140,7 @@
       /* אפשר לכוונן — תגיד “+2% ימינה, -1% למעלה” וכו' ואכוון עבורך. */
       const hotspots = [
         // אימון אישי – "פרטים" (שמאל-תחתון)
-        { id:"coach-details", left:11.0, top:80.0, width:14.0, height:14.0, action:() => openDialog('dlg-coach'), title:"אימון אישי — פרטים" },
+        { id:"coach-details", left:11.0, top:75.0, width:14.0, height:14.0, action:() => openDialog('dlg-coach'), title:"אימון אישי — פרטים" },
 
         // הרצאות – "פרטים" (מרכז-תחתון)
         { id:"talks-details", left:42.0, top:76.0, width:12.0, height:7.0, action:() => openDialog('dlg-talks'), title:"סדנאות/הרצאות — פרטים" },
@@ -254,6 +243,7 @@
   </script>
 </body>
 </html>
+
 
 
 
